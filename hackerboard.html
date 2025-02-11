@@ -2,10 +2,16 @@
 <html lang="en">
 
 <head>
+    <!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore.js"></script>
+<script src="js/firebase-config.js"></script>
+
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Lakshya CTF</title>
+    <title>VulnOps</title>
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 
@@ -36,7 +42,7 @@
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
                         <a href="index.html" class="pl-md-0 p-3 text-decoration-none text-light">
-                            <h3 class="bold"><span class="color_danger">LAKSHYA</span><span class="color_white">CTF</span></h3>
+                            <h3 class="bold"><span class="color_danger">Vuln</span><span class="color_white">Ops</span></h3>
                         </a>
                     </div>
                     <div class="navbar-nav ml-auto">
@@ -56,9 +62,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-xl-12">
-                    <h1 class="display-1 bold color_white content__title text-center"><span class="color_danger">HACKER</span>BOARD<span class="vim-caret">&nbsp;</span></h1>
+                    <h1 class="display-1 bold color_white no-glitch text-center" style="font-family: 'Hack', 'Courier New', monospace;">
+                        <span class="color_danger">HACKER</span>BOARD
+                    </h1>
+                    
                     <p class="text-grey lead text-spacey text-center hackerFont">
-                        Where the world get's ranked!
+                        Where The World Get's Ranked!
                     </p>
                     <div class="row justify-content-center my-5">
                         <div class="col-xl-10">
@@ -74,7 +83,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Team Name</th>
-                                <th># Challenges Solved</th>
+                                <th>Machines Solved</th>
                                 <th>Total Time Taken</th>
                                 <th>Score</th>
                             </tr>
@@ -82,28 +91,28 @@
                         <tbody>
                             <tr>
                                 <th scope="row">1</th>
-                                <td>liveoverflow</td>
+                                <td>Liveoverflow</td>
                                 <td>8</td>
                                 <td>42:59</td>
                                 <td>2540</td>
                             </tr>
                             <tr>
                                 <th scope="row">2</th>
-                                <td>CR007</td>
+                                <td>CR7</td>
                                 <td>6</td>
                                 <td>44:59</td>
                                 <td>1900</td>
                             </tr>
                             <tr>
                                 <th scope="row">3</th>
-                                <td>anonymous</td>
+                                <td>Anonymous</td>
                                 <td>4</td>
                                 <td>40:00</td>
                                 <td>650</td>
                             </tr>
                             <tr>
                                 <th scope="row">4</th>
-                                <td>ashawe</td>
+                                <td>Ashwin</td>
                                 <td>5</td>
                                 <td>40:10</td>
                                 <td>550</td>

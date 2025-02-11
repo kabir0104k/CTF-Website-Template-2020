@@ -1,5 +1,5 @@
 var strings = [
-  "Initialzing request",
+  "Initializing request",
   "Resolving internet address 127.0.0.1",
   "Requesting access to server",
   "Entering credentials",
@@ -8,23 +8,6 @@ var strings = [
   "Access granted",
   "Finding CTF backend services",
   "Services found on port 80",
-  "Starting mcstausd",
-  "Starting portmap",
-  "Starting setroubleshootd",
-  "Starting RPC idmapd",
-  "Starting mdmonitor",
-  "Starting system message bus",
-  "Starting Bluetooth services",
-  "Starting other filesystems",
-  "Starting PC/SC smart card daemon (pcscd)",
-  "Starting hidd",
-  "Enabling /etc/fstab swaps",
-  "INIT: Entering runlevel 3",
-  "Entering non-interactive startup",
-  "Applying INTEL CPU microcode update",
-  "Checking for hardware changes",
-  "Bringing up interface eth0",
-  "Determining IP information for eth0... done.",
   "Starting mcstausd",
   "Starting portmap",
   "Starting setroubleshootd",
@@ -60,7 +43,7 @@ var strings = [
   "Loading content",
   "Page rendered",
   "Starting display manager",
-  "WELCOME TO LAKSHYA CTF INC 2020",
+  "WELCOME TO VulnOps",
   "Initializing..."
 ];
 
@@ -69,34 +52,28 @@ var delay = 1000;
 var count = 0;
 var repeat = 0;
 
+// Load Sound File
+var typingSound = new Audio("https://github.com/kabir0104k/HackerHub/raw/refs/heads/main/P.mp3");  // 🔹 Replace with your uploaded sound file URL
+
 function addLog() {
   var row = createLog('ok', count);
   preloader.appendChild(row);
   
   goScrollToBottom();
-  
+
+  // 🔹 Play Sound Effect on Each Log Entry
+  typingSound.currentTime = 0;  // Reset sound
+  typingSound.play();
+
   count++;
   
   if (repeat == 0) {
-    if (count > 3) {
-      delay = 300;
-    }
-    
-    if (count > 6) {
-      delay = 100;
-    }
-    
-    if (count > 8) {
-      delay = 50;
-    }
-    
-    if (count > 10) {
-      delay = 10;
-    }
+    if (count > 3) delay = 300;
+    if (count > 6) delay = 100;
+    if (count > 8) delay = 50;
+    if (count > 10) delay = 10;
   } else {
-    if (count > 3) {
-      delay = 10;
-    }
+    if (count > 3) delay = 10;
   }
   
   if (count < strings.length) {
@@ -106,6 +83,7 @@ function addLog() {
   } else {
     setTimeout(function() {
       delay = 1000;
+      typingSound.pause();  // 🔹 Stop Sound when Done
       return createLog("ok");
     }, 1000);
   }
@@ -149,7 +127,6 @@ function setCookie(cname,cvalue,exdays) {
   document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
-// below method reference https://stackoverflow.com/questions/5639346/what-is-the-shortest-function-for-reading-a-cookie-by-name-in-javascript/25490531#25490531
 function getCookie(a) {
   var b = document.cookie.match('(^|;)\\s*' + a + '\\s*=\\s*([^;]+)');
   return b ? b.pop() : '';
@@ -158,15 +135,12 @@ function getCookie(a) {
 function checkCookie() {
   var user=getCookie("visited"); 
   if (user == 1) {   
-    setCookie("visited", 1, 30); //this will update the cookie      
+    setCookie("visited", 1, 30);      
     jQuery("#main").fadeIn("slow"); 
   } else {  
     addLog();      
     setCookie("visited", 1, 30);   
-
   }
 }
 
 checkCookie();
-
-

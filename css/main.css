@@ -269,6 +269,18 @@ input[type="radio"].toggle:checked + label {
     }
 }
 
+.no-glitch {
+    animation: none !important;
+    -webkit-animation: none !important;
+    text-shadow: none !important;
+    transform: none !important;
+    filter: none !important;
+    font-family: 'Hack', 'Courier New', monospace !important;
+    font-size: 4rem !important;
+    font-weight: bold !important;
+}
+
+
 .content__title {
     animation-name: glitch-anim-text;
     animation-duration: var(--time-anim);

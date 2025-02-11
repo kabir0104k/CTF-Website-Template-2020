@@ -2,51 +2,127 @@
 <html lang="en">
 
 <head>
+    <!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore.js"></script>
+<script src="js/firebase-config.js"></script>
+
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Lakshya CTF</title>
+    <title>VulnOps</title>
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     <link rel="stylesheet" href="css/bootstrap4-neon-glow.min.css">
-
-
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel='stylesheet' href='//cdn.jsdelivr.net/font-hack/2.020/css/hack.min.css'>
     <link rel="stylesheet" href="css/main.css">
+
+    <style>
+
+.btn-neon {
+    color: white;
+    background: none;
+    border: 2px solid #ff073a;
+    padding: 10px 20px;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-neon:hover {
+    background-color: #fd0000;
+    box-shadow: 0px 0px 10px #fd0000;
+}
+
+        /* Custom styles for green text */
+        .custom-green {
+            color: #2cd10b; /* Green shade */
+        }
+
+        /* Terminal Box Styling */
+        .terminal {
+            background-color: black;
+            color: rgb(13, 255, 13);
+            font-family: "Courier New", monospace;
+            padding: 20px;
+            border: 2px solid green;
+            border-radius: 5px;
+            width: 100%;
+            max-width: 600px;
+            min-height: 150px;
+            box-shadow: 0px 0px 10px green;
+            margin: 20px auto;
+            overflow-wrap: break-word;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+        }
+
+        .terminal:hover {
+            box-shadow: 0px 0px 20px rgb(0, 255, 0);
+        }
+
+        .terminal.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .blinking-text {
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* Custom style for neon glowing horizontal lines */
+        .terminal hr {
+            border: none;
+            height: 1px;
+            background: limegreen;
+            box-shadow: 0px 0px 8px limegreen;
+            margin: 10px 0;
+        }
+
+        /* Button Styling for Responsiveness */
+        .typewriter h4 {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 576px) {
+            .typewriter h4 {
+                font-size: 1rem;
+                padding: 8px 12px;
+            }
+        }
+    </style>
 </head>
 
 <body class="imgloaded">
-    <div class="glitch">
-        <div style="position: fixed;" class="glitch__img"></div>
-        <div style="position: fixed;" class="glitch__img"></div>
-        <div style="position: fixed;" class="glitch__img"></div>
-        <div style="position: fixed;" class="glitch__img"></div>
-        <div style="position: fixed;" class="glitch__img"></div>
-    </div>
     <div class="navbar-dark text-white">
         <div class="container">
             <nav class="navbar px-0 navbar-expand-lg navbar-dark">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <a href="index.html" class="pl-md-0 p-3 text-decoration-none text-light">
-                            <h3 class="bold"><span class="color_danger">LAKSHYA</span><span class="color_white">CTF</span></h3>
-                        </a>
-                    </div>
-                    <div class="navbar-nav ml-auto">
-                        <a href="index.html" class="p-3 text-decoration-none text-light bold">Home</a>
-                        <a href="about.html" class="p-3 text-decoration-none text-light bold">About</a>
-                        <a href="hackerboard.html" class="p-3 text-decoration-none text-light bold">Hackerboard</a>
+                        <a href="index.html" class="p-3 text-decoration-none text-light bold">Dashboard</a>
+                        <a href="about.html" class="p-3 text-decoration-none text-light bold">About Us</a>
+                        <a href="hackerboard.html" class="p-3 text-decoration-none text-light bold">Leaderboard</a>
                         <a href="login.html" class="p-3 text-decoration-none text-light bold">Login</a>
                         <a href="register.html" class="p-3 text-decoration-none text-light bold">Register</a>
                     </div>
                 </div>
             </nav>
-
         </div>
     </div>
 
@@ -54,49 +130,71 @@
         <div class="container">
             <div class="row">
                 <div class="col-xl-12">
-                    <h1 class="display-1 bold color_white content__title text-center"><span class="color_danger">ABOUT</span>US<span class="vim-caret">&nbsp;</span></h1>
                     <p class="text-grey text-spacey text-center hackerFont lead">
-                        A community of like minded individuals who support cybersecurity and FOSS.
+                        Dive Into the Cybersecurity Realm With Ready To Deploy Labs
                     </p>
+
                     <div class="row justify-content-center hackerFont">
                         <div class="col-md-8">
-                            <h5 class="bold color_white pt-3">
-                                What is Capture the Flag?
-                            </h5>
-                            A capture the flag (CTF) contest is a special kind of cybersecurity competition designed to challenge its participants to solve computer security problems and/or capture and defend computer systems. The game consists of a series of challenges where participants
-                            must reverse engineer, break, hack, decrypt, or do whatever it takes to solve the challenge. The challenges are all set up with the intent of being hacked, making it an excellent, legal way to get hands-on experience.
-                            <h5 class="bold color_white pt-3">
-                                About Lakshya CTF
-                            </h5>
-                            Lakshya CTF is a sub event of PICT's <a href="https://pictinc.org">Impetus and Concepts</a> mega event where students partcipate from all over the world!<br> Out aim is about spreading the importance of cybersecurity in today's
-                            community. Each and every person should be aware of different vulnerabilities in systems as well as how to protect onselves agains cyber attacks<br> We believe gamification is the best technique to teach oneself about cybersecurity.
-                            <h5 class="bold color_white pt-3">
-                                Who can play Lakshya CTF
-                            </h5>
-                            Lakshya CTF is mainly focused at students who are undergraduates.
-                            <div class="row text-center pt-5">
-                                <div class="col-xl-12">
-                                    <button class="btn btn-outline-danger btn-shadow px-3my-2 ml-0 ml-sm-1 text-left typewriter" onclick="(function(){window.location.href='login.html'})();">
-                                        <h4>LET IT RIP!</h4>
-                                        </button>
+                            <!-- Terminal for "What Is VulnOps?" -->
+                            <h5 class="bold color_white pt-3">What Is VulnOps?</h5>
+                            <div class="terminal animated">
+                                At VulnOps, We Provide Pre Configured Vulnerable Operating System Images Designed for Ethical Hackers, Penetration Testers, and Cybersecurity Enthusiasts.
+                                These .OVA Files contain intentionally vulnerable systems that users can download, deploy in their own Virtual Machines, and use for hands-on cybersecurity practice.
+                            </div>
+
+                            <!-- Terminal for "Why Choose VulnOps?" (With Lines Added) -->
+                            <h5 class="bold color_white pt-3">Why Choose VulnOps?</h5>
+                            <div class="terminal" id="whyChooseVulnOps">
+                                <span class="blinking-text">&#10004;</span> Pre-Configured OS Labs Download Ready To Run vulnerable machines for Penetration Testing.<br>
+                                <hr>
+                                <span class="blinking-text">&#10004;</span> No Online CTFs 100% Self-Paced Solve challenges at your own pace in your own environment.<br>
+                                <hr>
+                                <span class="blinking-text">&#10004;</span> Real-World Scenarios Our labs are designed to simulate Real Life security vulnerabilities.<br>
+                                <hr>
+                                <span class="blinking-text">&#10004;</span> Progress Tracking Track which machines you have downloaded and completed.<br>
+                                <hr>
+                                <span class="blinking-text">&#10004;</span> Hall of Fame Compete with others by submitting solutions and ranking on the leaderboard.
+                            </div>
+
+                            <!-- Terminal for "Our Mission" -->
+                            <h5 class="bold color_white pt-3">Our Mission</h5>
+                            <div class="terminal animated">
+                                VulnOps is Built for Ethical Hackers, Cybersecurity students, and Professionals who want to gain practical experience by exploiting real vulnerabilities in a controlled environment.
+                                Our goal is to bridge the gap between theoretical learning and Real-World Penetration Testing.
+                            </div>
+
+                            <div class="row justify-content-center text-center pt-5">
+                                <div class="col-12">
+                                    <button class="btn btn-neon mt-4" onclick="window.location.href='login.html'">Access The Mainframe</button>
                                 </div>
                             </div>
+                            
+
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- JavaScript for Animating the Terminal on Scroll -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let terminal = document.getElementById("whyChooseVulnOps");
 
+            function revealTerminal() {
+                let rect = terminal.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 50) {
+                    terminal.classList.add("animated");
+                }
+            }
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+            window.addEventListener("scroll", revealTerminal);
+            revealTerminal();
+        });
+    </script>
 
 </body>
-
 </html>
